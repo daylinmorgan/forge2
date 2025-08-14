@@ -98,7 +98,7 @@ proc compileCmd(cfg: Config, build: Build, rest: seq[string]): string =
   cmd.add rest
   cmd.add cfg.outDirFlag(build)
   cmd.add build.params.args
-  cmd.add build.path
+  cmd.add build.path.normalizedPath()
   cmd.join(" ")
 
 proc release(
