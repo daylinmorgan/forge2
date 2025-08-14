@@ -30,4 +30,4 @@ jobs:
 
       - name: Generate all build artifacts
         run: |
-          .\bin\forge.exe +release --verbose
+          .\bin\forge.exe +release --verbose -- --listCmd
