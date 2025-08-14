@@ -33,12 +33,12 @@ proc genFlags(target: string, args: seq[string] = @[]): seq[string] =
   result &=
     @[
       "--cc:clang",
-      fmt"--clang.exe={getAppFilename().quoteShell()}",
-      fmt"--clang.linkerexe={getAppFilename().quoteShell()}",
+      "--clang.exe=\"" & getAppFilename().quoteShell() & "\"",
+      "--clang.linkerexe=\"" & getAppFilename().quoteShell() & "\"",
       # &"--passC:\"-target {target} -fno-sanitize=undefined\"",
-      &"--passC:'-target {triplet}'",
+      fmt"--passC:'-target {triplet}'",
       # &"--passL:\"-target {target} -fno-sanitize=undefined\"",
-      &"--passL:'-target {triplet}'",
+      fmt"--passL:'-target {triplet}'",
     ]
 
 proc filterStr(os, arch: seq[string]): string =
@@ -83,9 +83,9 @@ proc cc(target: string, dryrun: bool = false, nimble: bool = false, args: seq[st
 
 proc outDirFlag(cfg: Config, build: Build): string =
   # pay attention to quotes here
-  result.add "--outdir:'"
-  result.add (cfg.outdir / formatDirName(build.params.format, cfg.name, cfg.version, build.triple))
-  result.add "'"
+  result.add "--outdir:\""
+  result.add (cfg.outdir / formatDirName(build.params.format, cfg.name, cfg.version, build.triple)).quoteShell()
+  result.add "\""
 
 proc compileCmd(cfg: Config, build: Build, rest: seq[string]): string =
   var cmd: seq[string]
