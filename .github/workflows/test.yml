@@ -10,7 +10,8 @@ jobs:
   build-artifact:
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        # os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [windows-latest]
 
     runs-on: ${{ matrix.os }}
 
@@ -25,6 +26,10 @@ jobs:
       - name: Bootstrap with installed version
         run: |
           nimble install -Y
+
+      - run: nimble setup -l
+      - run: |
+          nim c --cpu:arm64 --os:Linux --cc:clang --clang.exe=forge --clang.linkerexe=forge --passC:'-target aarch64-linux-gnu' --passL:'-target aarch64-linux-gnu' -d:release --outdir:"dist\forge-v2025.1006-aarch64-linux-gnu" src\forge
 
       - name: Generate all build artifacts
         run: |
