@@ -23,21 +23,11 @@ jobs:
       - uses: jiro4989/setup-nim-action@v2
       - uses: goto-bus-stop/setup-zig@v2
 
-      - name: Bootstrap with installed version
+      - name: Bootstrap with nimble
         run: |
-          nimble install -Y
-          nimble build -Y
-      - shell: python
-        run: |
-          import subprocess
-          import shlex
-          subprocess.run(
-            shlex.split(
-              """nim c --cpu:arm64 --os:Linux --cc:clang --clang.exe='D:\a\forge2\forge2\bin\forge.exe' --clang.linkerexe='D:\a\forge2\forge2\bin\forge.exe' -d:release --outdir:'dist\forge-v2025.1006-aarch64-linux-gnu' src\forge"""
-            )
-          )
+          nimble setup -l
+          nim c src/forge -o .\bin\forge.exe
 
       - name: Generate all build artifacts
         run: |
-          nimble setup -l
           .\bin\forge.exe +release --verbose
