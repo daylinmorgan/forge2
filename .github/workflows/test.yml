@@ -29,9 +29,12 @@ jobs:
           nimble build -Y
 
       - run: |
-          (Get-Command forge).Path
-          forge +targets
-          .\bin\forge.exe --help
+          nim c --cpu:arm64 --os:Linux --cc:clang \
+            --clang.exe='D:\a\forge2\forge2\bin\forge.exe' \
+            --clang.linkerexe='D:\a\forge2\forge2\bin\forge.exe' \
+            -d:release \
+            --outdir:'dist\forge-v2025.1006-aarch64-linux-gnu' \
+            src\forge
 
       - name: Generate all build artifacts
         run: |
