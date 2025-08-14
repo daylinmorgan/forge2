@@ -36,9 +36,9 @@ proc genFlags(target: string, args: seq[string] = @[]): seq[string] =
       "--clang.exe=\"" & getAppFilename().quoteShell() & "\"",
       "--clang.linkerexe=\"" & getAppFilename().quoteShell() & "\"",
       # &"--passC:\"-target {target} -fno-sanitize=undefined\"",
-    #   fmt"--passC:'-target {triplet}'",
+    fmt("--passC:\"-target {triplet}\""),
     #   # &"--passL:\"-target {target} -fno-sanitize=undefined\"",
-    #   fmt"--passL:'-target {triplet}'",
+    fmt("--passL:\"-target {triplet}\""),
     ]
 
 proc filterStr(os, arch: seq[string]): string =
