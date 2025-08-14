@@ -26,11 +26,12 @@ jobs:
       - name: Bootstrap with installed version
         run: |
           nimble install -Y
+          nimble build -Y
 
       - run: |
           (Get-Command forge).Path
           forge +targets
-          forge.exe --help
+          .\bin\forge.exe --help
 
       - run: nimble setup -l
       - run: |
