@@ -27,12 +27,11 @@ jobs:
         run: |
           nimble install -Y
       - run: |
-          forge.exe --help
-          forge.exe +targets
-
+          forge +targets
 
       - run: nimble setup -l
-      - run: |
+      - shell: bash
+        run: |
           nim c --cpu:arm64 --os:Linux --cc:clang --clang.exe=forge --clang.linkerexe=forge --passC:'-target aarch64-linux-gnu' --passL:'-target aarch64-linux-gnu' -d:release --outdir:"dist\forge-v2025.1006-aarch64-linux-gnu" src\forge
 
       - name: Generate all build artifacts
