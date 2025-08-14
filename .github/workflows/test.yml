@@ -26,6 +26,8 @@ jobs:
       - name: Bootstrap with installed version
         run: |
           nimble install -Y
+          mv C:\Users\runneradmin\.nimble\bin\forge.cmd C:\Users\runneradmin\.nimble\bin\forge.exe
+
       - run: |
           (Get-Command forge).Path
           forge +targets
