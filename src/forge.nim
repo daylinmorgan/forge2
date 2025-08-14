@@ -97,8 +97,10 @@ proc compileCmd(cfg: Config, build: Build, rest: seq[string]): string =
   cmd.add "-d:release"
   cmd.add rest
   cmd.add cfg.outDirFlag(build)
-  cmd.add build.params.args
+  if build.params.args.len > 0:
+    cmd.add build.params.args
   cmd.add build.path.normalizedPath()
+  echo cmd
   cmd.join(" ")
 
 proc release(
