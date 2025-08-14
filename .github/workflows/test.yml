@@ -29,5 +29,4 @@ jobs:
       - name: Generate all build artifacts
         run: |
           nimble setup -l
-          nim release
-
+          forge +release --verbose
