@@ -27,14 +27,11 @@ jobs:
         run: |
           nimble install -Y
           nimble build -Y
-
-      - run: |
-          nim c --cpu:arm64 --os:Linux --cc:clang \
-            --clang.exe='D:\a\forge2\forge2\bin\forge.exe' \
-            --clang.linkerexe='D:\a\forge2\forge2\bin\forge.exe' \
-            -d:release \
-            --outdir:'dist\forge-v2025.1006-aarch64-linux-gnu' \
-            src\forge
+      - shell: python
+      - run:
+          import subprocess
+          import shlex
+          subprocess.run(shlex.split("""nim c --cpu:arm64 --os:Linux --cc:clang --clang.exe='D:\a\forge2\forge2\bin\forge.exe' --clang.linkerexe='D:\a\forge2\forge2\bin\forge.exe' -d:release --outdir:'dist\forge-v2025.1006-aarch64-linux-gnu' src\forge""")
 
       - name: Generate all build artifacts
         run: |
