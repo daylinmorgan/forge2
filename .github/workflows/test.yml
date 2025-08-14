@@ -27,7 +27,7 @@ jobs:
         run: |
           nimble install -Y
       - run: |
-          (Get-Command cmd).Path
+          (Get-Command forge).Path
           forge +targets
 
       - run: nimble setup -l
