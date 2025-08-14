@@ -26,7 +26,7 @@ jobs:
       - name: Bootstrap with nimble
         run: |
           nimble setup -l
-          nim c src/forge -o .\bin\forge.exe
+          nim c -o:.\bin\forge.exe src\forge
 
       - name: Generate all build artifacts
         run: |
