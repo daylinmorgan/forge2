@@ -40,4 +40,4 @@ jobs:
       - name: Generate all build artifacts
         run: |
           nimble setup -l
-          forge +release --verbose
+          .\bin\forge.exe +release --verbose

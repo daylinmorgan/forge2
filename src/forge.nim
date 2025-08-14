@@ -33,10 +33,8 @@ proc genFlags(target: string, args: seq[string] = @[]): seq[string] =
   result &=
     @[
       "--cc:clang",
-      # "--clang.exe='" & getAppFilename().quoteShell() & "'",
-      # "--clang.linkerexe='" & getAppFilename().quoteShell() & "'",
-      "--clang.exe=forge",
-      "--clang.linkerexe=forge",
+      "--clang.exe='" & getAppFilename().quoteShell() & "'",
+      "--clang.linkerexe='" & getAppFilename().quoteShell() & "'",
       # &"--passC:\"-target {target} -fno-sanitize=undefined\"",
       fmt"--passC:'-target {triplet}'",
       # &"--passL:\"-target {target} -fno-sanitize=undefined\"",
